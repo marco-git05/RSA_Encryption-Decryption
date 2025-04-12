@@ -18,30 +18,31 @@ unsigned long gcd(unsigned long a, unsigned long b) {
 
 // Function to calculate modulo inverse using extended Euclidean algorithm
 unsigned long modInverse(unsigned long a, unsigned long m) {
-  
+    unsigned long multiple = a;
+
+    while((a * multiple) % m != 1){
+        multiple += a;
+    }
+
+    return multiple
 }
 
 // Function to generate keys for RSA encryption
 void generateKeys(unsigned long p, unsigned long q, unsigned long *n, unsigned long *e, unsigned long *d) {
-    long *n, unsigned long *e, unsigned long *d) {
-        *n = p * q;
-    
-        unsigned long phi = (p - 1) * (q - 1);
-        unsigned long* coPrimes = (unsigned long*)malloc(sizeof(unsigned long) * phi);
-        int index = 0;
-    
-        for(int i = 1; i < *n; i++){
-            if(gcd(i, *n) == 1){
-                coPrimes[index] = i;
-                index++;
-            }
+    *n = p * q;
+
+    unsigned long phi = (p - 1) * (q - 1);
+    unsigned long* coPrimes = (unsigned long*)malloc(sizeof(unsigned long) * phi);
+    int index = 0;
+
+    for(int i = 1; i < *n; i++){
+        if(gcd(i, *n) == 1){
+            coPrimes[index] = i;
+            index++;
         }
-    
-        for(int i = 0; i < phi; i++){
-            printf("%lu\n", coPrimes[i]);
-        }
-    
-        free(coPrimes);
+    }
+
+    free(coPrimes);
 }
 
 // Function to encrypt plaintext using RSA
