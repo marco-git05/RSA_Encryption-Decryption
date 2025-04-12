@@ -28,12 +28,12 @@ void generateKeys(unsigned long p, unsigned long q, unsigned long *n, unsigned l
 
 // Function to encrypt plaintext using RSA
 unsigned long encrypt(unsigned long plaintext, unsigned long e, unsigned long n) {
-   
+    return pow(plaintext, e) % n;
 }
 
 // Function to decrypt ciphertext using RSA
 unsigned long decrypt(unsigned long ciphertext, unsigned long d, unsigned long n) {
-  
+    return pow(ciphertext, d) % n;
 }
 
 unsigned long main() {
@@ -44,11 +44,6 @@ unsigned long main() {
     printf("Enter p and q: ");
     scanf("%lu %lu", &p, &q);
 
-    unsigned long divisor = gcd(p, q);
-
-    printf("%lo\n", divisor);
-    
-    
     // Generate RSA keys
     generateKeys(p, q, &n, &e, &d);
     printf("Public key (e, n): (%lu, %lu)\n", e, n);
